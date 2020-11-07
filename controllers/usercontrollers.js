@@ -20,7 +20,7 @@ module.exports.post_signup = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, displayname, email, password } = req.body;
+  const { full_name, display_name, gender,country,phone,email, password } = req.body;
 
   try {
     let user = await User.findOne({ email: email });
@@ -34,7 +34,7 @@ module.exports.post_signup = async (req, res) => {
       specialChars: false,
     });
     console.log(otp);
-    const newValue = { name, displayname, password, otp: { code: otp } }
+    const newValue = { full_name, display_name, gender,country,phone,email, password, otp: { code: otp } }
 
     user = await User.create(newValue);
     const message = `Thanks for registering! We will need to verify your email first. You can do so by entering ${user.otp.code}. This code is valid for only next 15 minutes.`;

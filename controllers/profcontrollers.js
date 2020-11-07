@@ -20,7 +20,7 @@ module.exports.post_signup = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, phone, email, password } = req.body;
+  const { full_name, gender,education,country,phone, email, password } = req.body;
 
   try {
     let user = await User.findOne({ email: email });
