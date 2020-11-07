@@ -1,1 +1,1 @@
-# website-project
+# A website especially for women to provide them a platform where their voices and opinions matter.
