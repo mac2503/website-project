@@ -1,7 +1,8 @@
+
 body {
 	background-image: url(Background.jpg);
 	background-size: cover;
-	background-color: pink;
+
     
 }
 .title{
@@ -10,7 +11,7 @@ body {
 .box{
 	width: 50%;
 	height: auto;
-    margin: 11% auto;
+    margin: 6% auto;
     box-shadow: 10px 10px 20px black;    
 }
 .box .up{
@@ -18,20 +19,21 @@ body {
 	width: auto;
 	height: 150px;
 	background: url(bg.jpg);
-	background-color: #1a535c;
+	background-color: #DE14E1;
     background-size: cover;
     background-position: center;
     text-align: center;  	
 }
 
 .box .down{
-	padding:40px 15%;
-	background:rgba(255,255,255);
+	padding:10% 15% 7%;
+	background:#FDC5F5;
 	line-height: 40px;
+
 }
 
 .form{
-	margin: 50px 70px;
+	margin: auto;
 	font-size: 15px;
 	font-variant: 
  }
@@ -39,6 +41,7 @@ body {
 .form input{
 	height: 30px;
 	border: none;
+	margin-bottom: 20px;
 	border-bottom: 1px solid black;
 	background:rgba(17,30,108,0.0);
 	width: 100%; 
@@ -47,24 +50,22 @@ body {
 .form input[type="submit"]{
 	margin: 20px 50%;
 	transform: translate(-50%);
-	background-color: white;
 	border-radius: 20px;
 	width:20%;
 	height: 40px;
-	border: 1px solid #152238;
-	background-color: #23395d;
-	background-color: #1a535c;
-	color: white;
+	border: 1px solid #4a074b;
+	background-color: #DE14E1;
+	color: #FEEBFB;
 	font-size: 18px;
 }
 .heading{
-	font-family: "Times New Roman", Times, serif;
+	font-family: "Berkshire Swash","ALGERIAN", sans-serif;
 	font-size: 50px;
 	position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-	color:white;
+	color:#FEEBFB;
 }
 .form input[type="text" ]{
 	height: 30px;
