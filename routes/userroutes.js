@@ -7,14 +7,14 @@ const User = require('../models/user');
 const userController = require('../controllers/usercontrollers');
 const { userInfo } = require('os');
 const passport = require('passport');
-//const { protectUser } = require('../middleware/auth');
+const { protectUser } = require('../middleware/auth');
 
 
 //normal user routes
 router.post('/signup', userController.post_signup);
 router.post('/login', userController.post_login);
-router.post('/verify-otp', [protectUser], userController.verifyOtp);
-router.put('/regenerate-otp', [protectUser], userController.regenerateOtp);
+router.post('/verify-otp', userController.verifyOtp);
+router.put('/regenerate-otp', userController.regenerateOtp);
 router.get('/me', [protectUser], userController.getMe);
 
 // auth with google

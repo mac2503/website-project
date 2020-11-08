@@ -6,11 +6,11 @@ const passport = require('passport');
 
 // *Config
 const connectdb = require('./config/db');
-const passportSetup = require('./config/passport-setup');
+//const passportSetup = require('./config/passport-setup');
 require('dotenv').config({ path: __dirname + '/.env' });
 
 // *Routes
-const profroutes = require('./routes/profroutes.js');
+const profroutes = require('./routes/professionalroutes.js');
 const userroutes = require('./routes/userroutes.js');
 const app = express();
 
