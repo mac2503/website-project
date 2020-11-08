@@ -7,13 +7,13 @@ const Professional = require('../models/professional');
 const profController = require('../controllers/profcontrollers');
 const { userInfo } = require('os');
 const passport = require('passport');
-const { protectProfessional } = require('../middleware/auth');
+//const { protectProfessional } = require('../middleware/auth');
 
 router.post('/signup', profController.post_signup);
 router.post('/login', profController.post_login);
-router.post('/verify-otp', [protectProfessional], profController.verifyOtp);
-router.put('/regenerate-otp', [protectProfessional], profController.regenerateOtp);
-router.get('/me', [protectProfessional], profController.getMe);
+// router.post('/verify-otp', [protectProfessional], profController.verifyOtp);
+// router.put('/regenerate-otp', [protectProfessional], profController.regenerateOtp);
+router.get('/me', profController.getMe);
 
 // auth with google
 router.get(

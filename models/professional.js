@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const validator = require('validator')
+const validator = require('validator');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const professionalSchema = new mongoose.Schema({
     full_name: {
@@ -65,6 +67,29 @@ const professionalSchema = new mongoose.Schema({
       default: false
     }
   });
+
+  // Match otp entered by the professional with otp stored in the database
+professionalSchema.methods.matchOtp = function (enteredOtp) {
+  if (enteredOtp !== this.otp.code) {
+    return false;
+  }
+  return true;
+};
+
+// Encrypt password using bcrypt
+professionalSchema.pre('save', async function(next) {
+  // Check if the password is modified or not, if it is not then move along, don't perform the hashing stuff
+  if (!this.isModified('password')) {
+    next();
+  }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+  // Sign JWT and return
+professionalSchema.methods.getSignedJwtToken = function() {
+  return jwt.sign({ id: this._id }, process.env.JWTTOKEN);
+};
 
   const Professional = mongoose.model('professionals', professionalSchema);
   module.exports = Professional;

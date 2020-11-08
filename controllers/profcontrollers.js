@@ -9,9 +9,9 @@ const otpGenerator = require("otp-generator");
 const nodemailer = require('nodemailer');
 
 // *Models
-const User = require('../models/user');
+const Professional = require('../models/professional');
 
-// @desc     Register User
+// @desc     Register Professional
 // @route    POST /api/user/signup
 // @access   Public
 module.exports.post_signup = async (req, res) => {
@@ -20,10 +20,10 @@ module.exports.post_signup = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { full_name, gender,education,country,phone, email, password } = req.body;
+  const { full_name, display_name, gender,education,country,phone, email, password } = req.body;
 
   try {
-    let user = await User.findOne({ email: email });
+    let user = await Professional.findOne({ email: email });
     if (user) {
       return res.status(400).json('user already exists');
     }
@@ -34,9 +34,9 @@ module.exports.post_signup = async (req, res) => {
       specialChars: false,
     });
     console.log(otp);
-    const newValue = { name, phone, email, password, otp: { code: otp } }
+    const newValue = { full_name, display_name, gender, education, country, phone, email, password, otp: { code: otp } }
 
-    user = await User.create(newValue);
+    user = await Professional.create(newValue);
     const message = `Thanks for registering! We will need to verify your email first. You can do so by entering ${user.otp.code}. This code is valid for only next 15 minutes.`;
 
 await sendEmail({
@@ -63,7 +63,7 @@ module.exports.post_login = async (req, res) => {
   const { email, password } = req.body;
   //to check if the user already exists
   try {
-    let user = await User.findOne({ email: email });
+    let user = await Professional.findOne({ email: email });
 
     if (!user) {
       return res.status(400).json({ errors: [{ msg: 'invalid credentials' }] });
@@ -85,7 +85,7 @@ module.exports.post_login = async (req, res) => {
 module.exports.verifyOtp = async (req, res) => {
 
   try {
-    const user = await User.findById(req.user.id);
+    const user = await Professional.findById(req.user.id);
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -123,7 +123,7 @@ module.exports.verifyOtp = async (req, res) => {
 // @access   Private
 module.exports.regenerateOtp = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await Professional.findById(req.user.id);
     if (!user) {
       return res.status(400).json({ errors: [{ msg: 'User does not exist' }] });
     }
@@ -168,7 +168,7 @@ sendTokenResponse(user, 200, req, res);
 module.exports.getMe = async (req, res) => {
   try {
     console.log(req.user);
-    const user = await User.findById(req.user.id);
+    const user = await Professional.findById(req.user.id);
     if (!user) {
       return res.status(400).json({
         success: false,
